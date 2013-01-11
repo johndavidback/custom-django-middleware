@@ -30,4 +30,22 @@ class MultisiteMiddleware(object):
         except:
             settings.SITE_ID = 1
 
-        
+        # Now we can do all sorts of fun things, like set up a special
+        # directory to serve templates from. Let's say our music video
+        # site is pk 3
+        if settings.SITE_ID == 3:
+
+            # We will have all our special templates for this stored in <project>/templates/music_videos/
+            settings.TEMPLATE_PREFIX = 'music_videos/'
+
+            # Alternatively, you could override the template directory from the
+            # settings themselves.
+#            settings.TEMPLATE_DIRS = (
+#                os.path.join(PROJECT_ROOT, 'music_videos')
+#            )
+
+        else:
+
+            # Otherwise we will just render them from our regular template directory.
+            settings.TEMPLATE_PREFIX = ''
+
